@@ -1,24 +1,13 @@
-﻿using System;
-using ICore.ICore;
-using ICore.Sites;
-using Respository;
+﻿using ICore.ICore;
+using MyApi;
+using MyApi.Attribute;
 
 namespace ICore.Sites
 {
-    public class RespositorySite : IRespositorySite
+    public class RespositorySite : SiteBase,IRespositorySite
     {
-        private readonly IServiceProvider _provider;
-        public RespositorySite(IServiceProvider provider)
-        {
-            _provider = provider;
-        }
-        private T GetService<T>()
-            where T : class
-        {
-            var obj = _provider?.GetService(typeof(T)) as T;
-
-            return obj;
-        }
-        public IRedisRepository Redis =>GetService<IRedisRepository>();
+        public RespositorySite(IObjectFactoryBuilder builder) : base(builder)
+        { }
+        public IRedisRepository Redis =>GetService<IRedisRepository>("Redis");
     }
 }

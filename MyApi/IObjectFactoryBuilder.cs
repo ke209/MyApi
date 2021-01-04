@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UniformInterfaces
+namespace MyApi
 {
     public interface IObjectFactoryBuilder
     {
-         Func<IServiceProvider, object[], object> BuildRestResultFuncForMethod(string methodName, Type[] parameterTypes = null, Type[] genericArgumentTypes = null);
+        Func<T> BuildRestResultFuncForProperty<T>(string propertyName);
     }
+
+    public interface IObjectFactoryBuilder<T>:IObjectFactoryBuilder
+    {
+    }
+
+    
 }

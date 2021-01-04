@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using MyApi.Attribute;
 
 namespace ICore
 {
+    [ExportApi(typeof(ApiInvokeContext))]
     public sealed class ApiInvokeContext
     {
         public string RequestId = Guid.NewGuid().ToString();

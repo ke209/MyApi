@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UniformInterfaces.Tasks
+namespace MyApi.Tasks
 {
     public class Class1
     {

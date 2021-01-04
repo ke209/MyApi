@@ -1,31 +1,22 @@
 ﻿using ICore.Sites;
+using Microsoft.Extensions.DependencyInjection;
+using MyApi;
+using MyApi.Attribute;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ICore
 {
-    public class MyApi : IMyApi
+    public class MyApi : SiteBase, IMyApi
     {
-        private readonly IServiceProvider _provider;
-        public MyApi(IServiceProvider provider)
-        {
-            _provider = provider;
-        }
-        private T GetService<T>()
-            where T : class
-        {
-            var obj = _provider?.GetService(typeof(T)) as T;
+        public MyApi(IObjectFactoryBuilder builder) : base(builder)
+        { }
 
-            return obj;
-        }
+        public IConfig Config => GetService<IConfig>("Config");
 
-        public IConfigSite Config => GetService<IConfigSite>();
+        public IServiceSite Service => GetService<IServiceSite>("Service");
 
-        public IServiceSite Service => GetService<IServiceSite>();
+        public IRespositorySite Respository =>  GetService<IRespositorySite>("Respository");
 
-        public IRespositorySite Respository =>  GetService<IRespositorySite>();
-
-        public ApiInvokeContext Context => GetService<ApiInvokeContext>();
+        public ApiInvokeContext Context => GetService<ApiInvokeContext>("Context");
     }
 }

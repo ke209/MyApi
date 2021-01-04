@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UniformInterfaces
+namespace MyApi
 {
     public partial class Class1
     {

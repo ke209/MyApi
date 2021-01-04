@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MyApi\MyApi.csproj" />
     <ProjectReference Include="..\ICore\ICore.csproj" />
     <ProjectReference Include="..\Respository\Respository.csproj" />
     <ProjectReference Include="..\Service\Service.csproj" />

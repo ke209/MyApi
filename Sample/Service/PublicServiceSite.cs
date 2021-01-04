@@ -1,22 +1,17 @@
 ﻿using System;
+using ICore;
 using ICore.ICore;
+using Microsoft.Extensions.DependencyInjection;
+using MyApi;
+using MyApi.Attribute;
 
 namespace Service
 {
-    public class PublicServiceSite : IPublicServiceSite
+    public class PublicServiceSite : SiteBase,IPublicServiceSite
     {
-        private readonly IServiceProvider _provider;
-        public PublicServiceSite(IServiceProvider provider)
-        {
-            _provider = provider;
-        }
-        private T GetService<T>()
-            where T : class
-        {
-            var obj = _provider?.GetService(typeof(T)) as T;
+        public PublicServiceSite(IObjectFactoryBuilder builder):base(builder)
+        { }
 
-            return obj;
-        }
-        public IUserPublicService User => GetService<IUserPublicService>();
+        public IUserPublicService User => GetService<IUserPublicService>("User");
     }
 }
