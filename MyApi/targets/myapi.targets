@@ -1,0 +1,25 @@
+﻿<!-- Assets\build\Walterlv.NuGetTool.targets -->
+<Project>
+
+  <PropertyGroup Condition=" $(IsInMyApiDebugMode) == 'True' ">
+    <MyApiTaskFolder >$(MSBuildThisFileDirectory)..\..\MyApi.Task\bin\$(Configuration)\netstandard2.0</MyApiTaskFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(IsInMyApiDebugMode) != 'True' ">
+    <!-- 我们使用 $(MSBuildRuntimeType) 来判断编译器是 .NET Core 的还是 .NET Framework 的。
+         然后选用对应的文件夹。-->
+    <MyApiTaskFolder >$(MSBuildThisFileDirectory)..\..\MyApi.Task\tasks\netstandard2.0</MyApiTaskFolder>
+  </PropertyGroup>
+
+  <UsingTask TaskName="MyApi.Generator.Tasks.GeneratorSiteStubTask" AssemblyFile="$(MyApiTaskFolder)\MyApi.SiteStubGenerator.BuildTasks.dll" />
+
+  <Target Name="MyApiTarget" BeforeTargets="CoreCompile">
+    <GeneratorSiteStubTask IntermediateOutputPath="$(IntermediateOutputPath)" MSBuildRuntimeType="$(MSBuildRuntimeType)">
+      <Output TaskParameter="AdditionalCompileFile" PropertyName="MyApiTarget_AdditionalCompileFile" />
+    </GeneratorSiteStubTask>
+  <Message Text="临时文件的路径为：$(MyApiTarget_AdditionalCompileFile)" />
+  <ItemGroup>
+    <Compile Include="$(MyApiTarget_AdditionalCompileFile)" />
+  </ItemGroup>
+</Target>
+</Project>
