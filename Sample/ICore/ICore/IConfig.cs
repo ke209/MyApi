@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MyApi.Attribute;
-
-namespace ICore.Sites
+﻿namespace Core.ICore
 {
     public interface IConfig
     {

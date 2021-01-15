@@ -2,24 +2,44 @@
 <Project>
 
   <PropertyGroup Condition=" $(IsInMyApiDebugMode) == 'True' ">
-    <MyApiTaskFolder >$(MSBuildThisFileDirectory)..\..\MyApi.Task\bin\$(Configuration)\netstandard2.0</MyApiTaskFolder>
+    <IntermediateOutputPath Condition="$(IntermediateOutputPath) == '' Or $(IntermediateOutputPath) == '*Undefined*'">$(MSBuildProjectDirectory)\obj\$(Configuration)</IntermediateOutputPath>
+    <MyApiTaskAssemblyFile>$(MSBuildThisFileDirectory)..\..\MyApi.Task\bin\$(Configuration)\netstandard2.0\MyApi.SiteStubGenerator.BuildTasks.dll</MyApiTaskAssemblyFile>
+    
+    <MyApiMinCoreVersionRequired>3.1</MyApiMinCoreVersionRequired>
+    <!-- Our default CLI version for error checking purposes -->
+    <MyApiNetCoreAppVersion>$(BundledNETCoreAppTargetFrameworkVersion)</MyApiNetCoreAppVersion>
+    <MyApiNetCoreAppVersion Condition="'$(MyApiNetCoreAppVersion)' == ''">1.0</MyApiNetCoreAppVersion>
+
+    <!--
+    internal namespace to be added to internally generated Site code. 
+    Can be overriden by user in case of namespace clashes.
+    -->
+    <InternalNamespace Condition=" '$(InternalNamespace)' == '' ">$(RootNamespace)</InternalNamespace>
+
+    <SiteGeneratedFile>$(IntermediateOutputPath)\MyApiSiteStubs.g.cs</SiteGeneratedFile>
   </PropertyGroup>
+ 
+  <UsingTask TaskName="MyApi.Generator.Tasks.GeneratorSiteStubTask" AssemblyFile="$(MyApiTaskAssemblyFile)" />
 
-  <PropertyGroup Condition=" $(IsInMyApiDebugMode) != 'True' ">
-    <!-- 我们使用 $(MSBuildRuntimeType) 来判断编译器是 .NET Core 的还是 .NET Framework 的。
-         然后选用对应的文件夹。-->
-    <MyApiTaskFolder >$(MSBuildThisFileDirectory)..\..\MyApi.Task\tasks\netstandard2.0</MyApiTaskFolder>
-  </PropertyGroup>
+  <Target Name="MyApiTarget" BeforeTargets="BeforeCompile;CoreCompile"
+          Inputs="@(Compile)" Outputs="$(SiteGeneratedFile)"
+          Condition="$(Language) == 'C#' and '$(MyApiDisableGenerateSiteStubs)'==''">
+    <Error Condition="'$(MSBuildRuntimeType)' == 'Core' and '$(MyApiMinCoreVersionRequired)' > '$(MyApiNetCoreAppVersion)' "
+           Text="requires at least the .NET Core SDK v3.1 to run with 'dotnet build'"
+           ContinueOnError="false"
+    />
 
-  <UsingTask TaskName="MyApi.Generator.Tasks.GeneratorSiteStubTask" AssemblyFile="$(MyApiTaskFolder)\MyApi.SiteStubGenerator.BuildTasks.dll" />
+    <GeneratorSiteStubTask SourceFiles="@(Compile)"
+                           BaseDirectory="$(MSBuildProjectDirectory)"
+                           OutputFile="$(SiteGeneratedFile)"
+                           InternalNamespace="$(InternalNamespace)"
+    />
 
-  <Target Name="MyApiTarget" BeforeTargets="CoreCompile">
-    <GeneratorSiteStubTask IntermediateOutputPath="$(IntermediateOutputPath)" MSBuildRuntimeType="$(MSBuildRuntimeType)">
-      <Output TaskParameter="AdditionalCompileFile" PropertyName="MyApiTarget_AdditionalCompileFile" />
-    </GeneratorSiteStubTask>
-  <Message Text="临时文件的路径为：$(MyApiTarget_AdditionalCompileFile)" />
-  <ItemGroup>
-    <Compile Include="$(MyApiTarget_AdditionalCompileFile)" />
-  </ItemGroup>
-</Target>
+    <Message Text="Processed MyApi Site Stubs" />
+
+    <ItemGroup Condition="Exists('$(SiteGeneratedFile)')">
+      <Compile Include="$(SiteGeneratedFile)" />
+      <!--<FileWrites Include="$(SiteGeneratedFile)" />-->
+    </ItemGroup>
+  </Target>
 </Project>

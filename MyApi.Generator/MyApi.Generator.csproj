@@ -4,4 +4,32 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="GeneratedSiteStubTemplate.mustache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="GeneratedSiteStubTemplate.mustache">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
+    <PackageReference Include="Nustache" Version="1.16.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Microsoft.CodeAnalysis.CSharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Microsoft.CodeAnalysis.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Nustache.Core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

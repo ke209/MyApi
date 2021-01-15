@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyModel;
-using MyApi.Attribute;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace MyApi.Finder
 {
@@ -72,7 +70,7 @@ namespace MyApi.Finder
 
             foreach (var assembly in assemblyList)
             {
-                foreach (var type in assembly.GetTypes().Where(r=>r.IsInterface))
+                foreach (var type in assembly.GetTypes().Where(r => r.IsInterface))
                 {
                     foreach (var apiContractAttribute in type.GetCustomAttributes(true)
                                                             .Where(r => r is MyApiSiteAttribute)

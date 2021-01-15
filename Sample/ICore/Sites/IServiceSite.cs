@@ -1,11 +1,9 @@
-﻿using ICore.ICore;
-using Microsoft.Extensions.DependencyInjection;
-using MyApi.Attribute;
+﻿using MyApi;
 
-namespace ICore.Sites
+namespace Core.Sites
 {
     [MyApiSite]
-    public interface IServiceSite:ISite
+    public interface IServiceSite : ISite
     {
         IPublicServiceSite Public { get; }
     }

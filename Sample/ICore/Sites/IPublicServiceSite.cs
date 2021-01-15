@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MyApi.Attribute;
+﻿using Core.ICore;
+using MyApi;
 
-namespace ICore.ICore
+namespace Core.Sites
 {
     [MyApiSite]
-    public interface IPublicServiceSite:ISite
+    public interface IPublicServiceSite : ISite
     {
         IUserPublicService User { get; }
     }

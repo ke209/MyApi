@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ICore.ICore;
-using ICore.Sites;
+﻿using Core.ICore;
 using Respository;
 
-namespace ICore.Sites
+namespace Core.Sites
 {
     public static class RespositorySiteExtension
     {

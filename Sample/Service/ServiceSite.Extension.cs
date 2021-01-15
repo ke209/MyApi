@@ -1,6 +1,6 @@
 ﻿using Service;
 
-namespace ICore.Sites
+namespace Core.Sites
 {
     public static class ServiceSiteExtension
     {

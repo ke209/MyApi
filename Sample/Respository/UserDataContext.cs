@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ICore.ICore;
-using MyApi.Attribute;
+﻿using MyApi;
 
 namespace Respository
 {

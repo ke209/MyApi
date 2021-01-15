@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyApi
 {
@@ -9,9 +7,9 @@ namespace MyApi
         Func<T> BuildRestResultFuncForProperty<T>(string propertyName);
     }
 
-    public interface IObjectFactoryBuilder<T>:IObjectFactoryBuilder
+    public interface IObjectFactoryBuilder<T> : IObjectFactoryBuilder
     {
     }
 
-    
+
 }

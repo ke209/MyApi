@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyApi
 {
     public static class ObjectFactoryBuilder
     {
 
-        public static IObjectFactoryBuilder<T> ForType<T>(IServiceProvider serviceProvider,MyApiSettings settings = null)
+        public static IObjectFactoryBuilder<T> ForType<T>(IServiceProvider serviceProvider, MyApiSiteSettings settings = null)
         {
-            return new ObjectFactoryBuilderImplementation<T>(serviceProvider,settings);
+            return new ObjectFactoryBuilderImplementation<T>(serviceProvider, settings);
         }
 
 
-        public static IObjectFactoryBuilder ForType(IServiceProvider serviceProvider,Type myApiSiteType, MyApiSettings settings)
+        public static IObjectFactoryBuilder ForType(IServiceProvider serviceProvider, Type myApiSiteType, MyApiSiteSettings settings)
         {
-            return new ObjectFactoryBuilderImplementation(serviceProvider,myApiSiteType,settings);
+            return new ObjectFactoryBuilderImplementation(serviceProvider, myApiSiteType, settings);
         }
 
     }

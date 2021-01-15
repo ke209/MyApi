@@ -1,25 +1,24 @@
-﻿using ICore;
-using System;
-using System.IO;
-using ICore.ICore;
-using ICore.Sites;
+﻿using Core;
+using Core.Sites;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MyApi;
 using Respository;
-using Service;
+using System;
+using System.IO;
 
 namespace App
 {
     class Program
     {
-        static void Main(string[] args) { 
+        static void Main(string[] args)
+        {
             var services = new ServiceCollection();
             ConfigureServices(services);
             // create ServiceProvider
             var serviceProvider = services.BuildServiceProvider();
-            IMyApi myApi=serviceProvider.GetService(typeof(IMyApi)) as IMyApi;
+            IMyApiSite myApi = serviceProvider.GetService(typeof(IMyApiSite)) as IMyApiSite;
             Console.WriteLine($"Context:{myApi!.Context.GetHashCode()}");
             Console.WriteLine($"Config:{myApi!.Config.GetHashCode()}");
             Console.WriteLine($"Service:{myApi!.Service.GetHashCode()}");
@@ -35,29 +34,17 @@ namespace App
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var configuration = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
-               //.AddJsonFile($"appsettings.{environmentName}.json", optional: false, true)
                .AddEnvironmentVariables()
                .Build();
 
             services.AddLogging(builder =>
             {
-                //builder.AddConfiguration(configuration.GetSection("Logging"));
                 builder.AddConsole();
             });
 
-            //services.AddSingleton<IConfiguration>(provider => configuration);
             services.AddMyApiSite();
-            //services.AddSingleton<IObjectFactoryBuilder<IMyApi>>((Func<IServiceProvider, IObjectFactoryBuilder>)
-            //    (provider => new ObjectFactoryBuilderImplementation(provider, typeof(ICore.IMyApi))));
-            //services.AddSingleton<IObjectFactoryBuilder>((Func<IServiceProvider, IObjectFactoryBuilder>)
-            //    (provider => new ObjectFactoryBuilderImplementation(provider, typeof(IServiceSite))));
-            //services.AddSingleton<IObjectFactoryBuilder>((Func<IServiceProvider, IObjectFactoryBuilder>)
-            //    (provider => new ObjectFactoryBuilderImplementation(provider, typeof(IPublicServiceSite))));
-            //services.AddSingleton<IObjectFactoryBuilder>((Func<IServiceProvider, IObjectFactoryBuilder>)
-            //    (provider => new ObjectFactoryBuilderImplementation(provider, typeof(IRespositorySite))));
 
         }
     }

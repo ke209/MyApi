@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ICore.ICore;
-using MyApi.Attribute;
+﻿using Core.ICore;
+using MyApi;
 
-namespace ICore.Sites
+namespace Core.Sites
 {
     [MyApiSite]
-    public interface IRespositorySite:ISite
+    public interface IRespositorySite : ISite
     {
         IRedisRepository Redis { get; }
     }

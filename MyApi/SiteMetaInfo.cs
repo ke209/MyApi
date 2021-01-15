@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyApi
@@ -10,12 +7,12 @@ namespace MyApi
     public class SiteMetaInfo
     {
         private Type _apiSiteType;
-        private MyApiSettings _myApiSettings;
+        private MyApiSiteSettings _myApiSettings;
 
-        public SiteMetaInfo(Type apiSiteType, PropertyInfo propertyInfo, MyApiSettings myApiSettings)
+        public SiteMetaInfo(Type apiSiteType, PropertyInfo propertyInfo, MyApiSiteSettings myApiSettings)
         {
             this._apiSiteType = apiSiteType;
-            this._myApiSettings = myApiSettings ?? new MyApiSettings();
+            this._myApiSettings = myApiSettings ?? new MyApiSiteSettings();
             this.PropertyInfo = propertyInfo;
             this.ApiSiteType = apiSiteType ?? throw new ArgumentNullException(nameof(apiSiteType));
             this.Name = propertyInfo.Name;

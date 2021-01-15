@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using ICore.ICore;
-using ICore.Sites;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Core.ICore;
 using MyApi;
-using MyApi.Attribute;
+using System.Threading.Tasks;
 
 namespace Service
 {
     [ExportApi(typeof(IUserService))]
     [ExportApi(typeof(IUserPublicService))]
-    public class UserService :IUserService, IUserPublicService
+    public class UserService : IUserService, IUserPublicService
     {
         public string GetEmail(int userId)
         {

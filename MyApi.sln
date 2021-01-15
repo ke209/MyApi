@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{377302
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "Sample\App\App.csproj", "{2A44E5E1-2E45-4C76-8B2D-76FC9C2EABD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICore", "Sample\ICore\ICore.csproj", "{2EEBF4F2-FF1B-444D-966C-490E6F3AD098}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Sample\ICore\Core.csproj", "{2EEBF4F2-FF1B-444D-966C-490E6F3AD098}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Respository", "Sample\Respository\Respository.csproj", "{ECAF9988-92B9-4DFC-8DAA-6A2E1D2A9C1D}"
 EndProject
