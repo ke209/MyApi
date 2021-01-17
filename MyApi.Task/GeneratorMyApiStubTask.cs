@@ -9,13 +9,13 @@ using System.Threading;
 
 namespace MyApi.Generator.Tasks
 {
-    public class GeneratorSiteStubTask : Task
+    public class GeneratorMyApiStubTask : Task
     {
         [Required]
         public string BaseDirectory { get; set; }
 
         [Required]
-        public string OutputFile { get; set; }
+        public string MyApiOutputFile { get; set; }
 
         [Required]
         public ITaskItem[] SourceFiles { get; set; }
@@ -33,9 +33,9 @@ namespace MyApi.Generator.Tasks
                     return false;
                 }
 
-                if (string.IsNullOrWhiteSpace(OutputFile))
+                if (string.IsNullOrWhiteSpace(MyApiOutputFile))
                 {
-                    Log.LogError($"{nameof(OutputFile)} is not set");
+                    Log.LogError($"{nameof(MyApiOutputFile)} is not set");
                     return false;
                 }
 
@@ -54,7 +54,7 @@ namespace MyApi.Generator.Tasks
 
                 string contents = null;
 
-                var target = new FileInfo(OutputFile);
+                var target = new FileInfo(MyApiOutputFile);
 
                 if (target.Exists)
                 {

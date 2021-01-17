@@ -16,30 +16,30 @@
     -->
     <InternalNamespace Condition=" '$(InternalNamespace)' == '' ">$(RootNamespace)</InternalNamespace>
 
-    <SiteGeneratedFile>$(IntermediateOutputPath)\MyApiSiteStubs.g.cs</SiteGeneratedFile>
+    <MyApiGeneratedFile>$(IntermediateOutputPath)\MyApiStubs.g.cs</MyApiGeneratedFile>
   </PropertyGroup>
  
-  <UsingTask TaskName="MyApi.Generator.Tasks.GeneratorSiteStubTask" AssemblyFile="$(MyApiTaskAssemblyFile)" />
+  <UsingTask TaskName="MyApi.Generator.Tasks.GeneratorMyApiStubTask" AssemblyFile="$(MyApiTaskAssemblyFile)" />
 
   <Target Name="MyApiTarget" BeforeTargets="BeforeCompile;CoreCompile"
-          Inputs="@(Compile)" Outputs="$(SiteGeneratedFile)"
+          Inputs="@(Compile)" Outputs="$(MyApiGeneratedFile)"
           Condition="$(Language) == 'C#' and '$(MyApiDisableGenerateSiteStubs)'==''">
     <Error Condition="'$(MSBuildRuntimeType)' == 'Core' and '$(MyApiMinCoreVersionRequired)' > '$(MyApiNetCoreAppVersion)' "
            Text="requires at least the .NET Core SDK v3.1 to run with 'dotnet build'"
            ContinueOnError="false"
     />
 
-    <GeneratorSiteStubTask SourceFiles="@(Compile)"
+    <GeneratorMyApiStubTask SourceFiles="@(Compile)"
                            BaseDirectory="$(MSBuildProjectDirectory)"
-                           OutputFile="$(SiteGeneratedFile)"
+                           MyApiOutputFile="$(MyApiGeneratedFile)"
                            InternalNamespace="$(InternalNamespace)"
     />
 
     <Message Text="Processed MyApi Site Stubs" />
 
-    <ItemGroup Condition="Exists('$(SiteGeneratedFile)')">
-      <Compile Include="$(SiteGeneratedFile)" />
-      <!--<FileWrites Include="$(SiteGeneratedFile)" />-->
+    <ItemGroup Condition="Exists('$(MyApiGeneratedFile)')">
+      <Compile Include="$(MyApiGeneratedFile)" />
+      <!--<FileWrites Include="$(MyApiGeneratedFile)" />-->
     </ItemGroup>
   </Target>
 </Project>
