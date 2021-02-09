@@ -12,6 +12,7 @@ namespace MyApi.Generator
         public List<BaseClassInfo> BaseClasses { get; set; }
         public List<MethodTemplateInfo> MethodList { get; set; }
         public List<PropertyTemplateInfo> PropertyList { get; set; }
+        public List<ExtensionTemplateInfo> ExtensionList { get; set; }
         public bool HasAnyMethodsWithNullableArguments => MethodList.SelectMany(ml => ml.ArgumentListInfo).Any(y => y.TypeInfo.ToString().EndsWith("?"));
         public string Modifiers { get; set; }
         public string Namespace { get; set; }

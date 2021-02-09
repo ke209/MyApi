@@ -8,4 +8,5 @@
     <ProjectReference Include="..\ICore\Core.csproj" />
   </ItemGroup>
 
+  <Import Project="..\..\MyApi\targets\myapi.targets" />
 </Project>

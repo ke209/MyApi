@@ -1,12 +1,12 @@
-﻿using Core;
-using Core.Sites;
+﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using Core;
+using Core.Sites;
 using MyApi;
 using Respository;
-using System;
-using System.IO;
 
 namespace App
 {
@@ -43,9 +43,7 @@ namespace App
             {
                 builder.AddConsole();
             });
-
             services.AddMyApiSite();
-
         }
     }
 }

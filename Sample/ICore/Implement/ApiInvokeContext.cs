@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Core.Implement
 {
-    [ExportApi(typeof(ApiInvokeContext))]
+    [ExportMyApi(typeof(ApiInvokeContext))]
     public sealed class ApiInvokeContext
     {
         public string RequestId = Guid.NewGuid().ToString();

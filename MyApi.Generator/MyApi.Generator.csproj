@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GeneratedExtensionStubTemplate.mustache" />
     <None Remove="GeneratedSiteStubTemplate.mustache" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="GeneratedExtensionStubTemplate.mustache" />
     <EmbeddedResource Include="GeneratedSiteStubTemplate.mustache">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

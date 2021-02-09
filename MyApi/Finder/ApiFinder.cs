@@ -100,8 +100,8 @@ namespace MyApi.Finder
                         }
                     }
                     foreach (var exportApiAttribute in type.GetCustomAttributes(true)
-                                                            .Where(r => r is ExportApiAttribute)
-                                                            .Cast<ExportApiAttribute>())
+                                                            .Where(r => r is ExportMyApiAttribute)
+                                                            .Cast<ExportMyApiAttribute>())
                     {
                         contractType.ApiTypes.Add(new ApiContractType()
                         {

@@ -4,9 +4,9 @@ using System;
 namespace MyApi
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class ExportApiAttribute : ApiContractAttribute
+    public class ExportMyApiAttribute : ApiContractAttribute
     {
-        public ExportApiAttribute(Type apiType, ServiceLifetime lifetime = ServiceLifetime.Scoped, string name = null)
+        public ExportMyApiAttribute(Type apiType, ServiceLifetime lifetime = ServiceLifetime.Scoped, string name = null)
             : base(lifetime, name)
         {
             this.ApiType = apiType;

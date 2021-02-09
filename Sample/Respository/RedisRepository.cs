@@ -3,7 +3,7 @@ using MyApi;
 
 namespace Respository
 {
-    [ExportApi(typeof(IRedisRepository))]
+    [ExportMyApi(typeof(IRedisRepository))]
     public class RedisRepository : IRedisRepository
     {
         public string Pop()

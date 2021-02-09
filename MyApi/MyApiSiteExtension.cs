@@ -4,7 +4,7 @@ using System;
 
 namespace MyApi
 {
-    public static class MyApiSiteExtensions
+    public static class MyApiSiteExtension
     {
         public static IServiceCollection AddMyApiSite(this IServiceCollection services
             , ContractType myApiSiteTypes = null

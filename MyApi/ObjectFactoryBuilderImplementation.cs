@@ -61,6 +61,17 @@ namespace MyApi
             };
         }
 
+        public Func<T> BuildRestResultFuncForExtension<T>()
+        {
+            var result = _serviceProvider.GetService(typeof(T));
+            return () =>
+          {
+              if (result == null)
+                  return default(T);
+              else
+                  return (T)result;
+          };
+        }
 
         Func<T> BuildFuncForProperty<T>(SiteMetaInfo restMethod)
         {

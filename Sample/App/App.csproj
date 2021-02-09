@@ -23,5 +23,5 @@
     <ProjectReference Include="..\Service\Service.csproj" />
   </ItemGroup>
 
-    <Import Project="..\..\MyApi\targets\myapi.targets" />
+    <!--<Import Project="..\..\MyApi\targets\myapi.targets" />-->
 </Project>

@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace MyApi.Generator.Tasks
 {
-    public class GeneratorSiteStubTask : Task
+    public class GeneratorExtensionStubTask : Task
     {
         [Required]
         public string BaseDirectory { get; set; }
@@ -40,13 +40,12 @@ namespace MyApi.Generator.Tasks
                     SourceFiles = Array.Empty<ITaskItem>();
 
                 var targetDir = new DirectoryInfo(BaseDirectory);
-
                 var files = SourceFiles.Select(item => item.ItemSpec).Distinct()
                                      .Select(x => new FileInfo(Path.Combine(targetDir.FullName, x)))
-                                     .Where(x => x.Name.Contains("SiteStubs") == false && x.Exists && x.Length > 0)
+                                     .Where(x => x.Name.Contains("ExtensionStubs") == false && x.Exists && x.Length > 0)
                                      .ToArray();
 
-                return GeneratorSiteStub(files, OutputFile);
+                return GeneratorExtensionStub(files, OutputFile);
             }
             catch (Exception e)
             {
@@ -55,9 +54,9 @@ namespace MyApi.Generator.Tasks
             }
         }
 
-        private bool GeneratorSiteStub(FileInfo[] files, string filePath)
+        private bool GeneratorExtensionStub(FileInfo[] files, string filePath)
         {
-            var generator = new SiteStubGenerator(InternalNamespace, msg => Log.LogWarning(msg));
+            var generator = new ExtenstionStubGenerator(InternalNamespace, msg => Log.LogWarning(msg));
             var template = generator.GenerateInterfaceStubs(files.Select(x => x.FullName).ToArray()).Trim();
 
             return WriteFile(filePath, template);

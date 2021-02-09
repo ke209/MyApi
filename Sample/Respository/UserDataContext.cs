@@ -2,7 +2,7 @@
 
 namespace Respository
 {
-    [ExportApi(typeof(UserDataContext))]
+    [ExportMyApi(typeof(UserDataContext))]
     public class UserDataContext
     {
         public string ConnextionString { get; set; } = "sqlserver";
